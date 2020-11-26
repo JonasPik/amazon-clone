@@ -5,7 +5,11 @@
   height: max-content;
 }
 
-.checkout__add {
+.checkout__left {
+  margin-right: 10px;
+}
+
+.checkout__ad {
   width: 100%;
   margin-bottom: 10px;
 }
