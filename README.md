@@ -14,7 +14,11 @@ Material-UI
 
 This project is setup to be deployed with firebase CLI.
 
-```firebase init (initializes firebase in the project) \
-npm run build (creates production build in Build directory)
-firebase deploy (deploys site to internet)
-```
+Initialize firebase:
+`firebase init` \
+
+Create production build:
+`npm run build`
+
+Deploy:
+`firebase deploy`
