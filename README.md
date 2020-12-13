@@ -8,7 +8,8 @@ This project was bootstrapped with:
 
 React \
 Firebase \
-Material-UI
+Material-UI \
+Stripe
 
 ## Deployment
 
