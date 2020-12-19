@@ -24,16 +24,20 @@ function Payment() {
     const [clientSecret, setClientSecret] = useState(true);
 
     useEffect(() => {
-        // generate the special stripe secret which allows us
-        // to charge a customer
-        const getClientSecret = async () => {
-            const response = await axios({
-                method: 'post',
-                url: `/payments/create?total=${getBasketTotal(basket) * 100}` // Stripe expects currency subunits
-            });
-            setClientSecret(response.data.clientSecret);
+
+        const amount = getBasketTotal(basket) * 100;
+        if (amount > 0) {
+            // generate the special stripe secret which allows us
+            // to charge a customer
+            const getClientSecret = async () => {
+                const response = await axios({
+                    method: 'post',
+                    url: `/payments/create?total=${amount}` // Stripe expects currency subunits
+                });
+                setClientSecret(response.data.clientSecret);
+            }
+            getClientSecret();
         }
-        getClientSecret();
     }, [basket])
 
     console.log('THE CLIENT SECRET IS >>>', clientSecret);
@@ -133,9 +137,15 @@ function Payment() {
                                     thousandSeparator={true}
                                     prefix={"£"}
                                 />
-                                <button disabled={processing || disabled || succeeded}>
-                                    <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
-                                </button>
+                                {
+                                    basket?.length != 0 &&
+                                    (
+                                        <button disabled={processing || disabled || succeeded}>
+                                            <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
+                                        </button>
+                                    )
+                                }
+
                             </div>
 
                             {/* Errors */}
